@@ -44,10 +44,9 @@ function AssetPreview() {
       const savedOicVendor = await oicVendorResponse.json();
 
       const hardwareAssetPayload = {
-        deviceType: data.deviceType,
+        deviceType: data.deviceType === "Other" ? data.otherDeviceType : data.deviceType,
         make: data.make,
         model: data.model,
-        serialNumber: data.serialNumber,
         deviceSerialNumber: data.deviceSerialNumber,
         numProcessors: data.numProcessors,
         memory: data.memory,
@@ -123,10 +122,9 @@ function AssetPreview() {
           <button className="edit-section-button" onClick={() => handleEditSection("/assets/details")}>Edit</button>
         </div>
         <div className="preview-grid">
-          <div className="preview-field"><span className="preview-label">Device Type</span><span className="preview-value">{data.deviceType || "-"}</span></div>
+          <div className="preview-field"><span className="preview-label">Device Type</span><span className="preview-value">{data.deviceType === "Other" ? data.otherDeviceType : data.deviceType || "-"}</span></div>
           <div className="preview-field"><span className="preview-label">Make</span><span className="preview-value">{data.make || "-"}</span></div>
           <div className="preview-field"><span className="preview-label">Model</span><span className="preview-value">{data.model || "-"}</span></div>
-          <div className="preview-field"><span className="preview-label">Serial Number</span><span className="preview-value">{data.serialNumber || "-"}</span></div>
           <div className="preview-field"><span className="preview-label">Device Serial Number</span><span className="preview-value">{data.deviceSerialNumber || "-"}</span></div>
           <div className="preview-field"><span className="preview-label">Processors</span><span className="preview-value">{data.numProcessors || "-"}</span></div>
           <div className="preview-field"><span className="preview-label">Memory</span><span className="preview-value">{data.memory || "-"}</span></div>

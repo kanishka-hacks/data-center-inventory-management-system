@@ -89,7 +89,7 @@ function AssetsList() {
               <th>Device Type</th>
               <th>Make</th>
               <th>Model</th>
-              <th>Serial Number</th>
+              <th>Device Serial Number</th>
               <th>Location</th>
               <th>Status</th>
               <th>Warranty Expiry</th>
@@ -118,7 +118,7 @@ function AssetsList() {
                     <td>{asset.deviceType}</td>
                     <td>{asset.make}</td>
                     <td>{asset.model}</td>
-                    <td>{asset.serialNumber}</td>
+                    <td>{asset.deviceSerialNumber || "-"}</td>
                     <td>{asset.location}</td>
                     <td>{asset.status}</td>
                     <td>{asset.warrantyExpiryDate || "-"}</td>

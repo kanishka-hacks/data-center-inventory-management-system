@@ -13,7 +13,6 @@ function AssetFormPage2() {
     otherDeviceType: incoming.otherDeviceType || "",
     make: incoming.make || "",
     model: incoming.model || "",
-    serialNumber: incoming.serialNumber || "",
     deviceSerialNumber: incoming.deviceSerialNumber || "",
     purchaseOrderNumber: incoming.purchaseOrderNumber || "",
     numProcessors: incoming.numProcessors || "",
@@ -57,7 +56,7 @@ function AssetFormPage2() {
     if (formData.deviceType === "Other" && !formData.otherDeviceType) newErrors.otherDeviceType = true;
     if (!formData.make) newErrors.make = true;
     if (!formData.model) newErrors.model = true;
-    if (!formData.serialNumber) newErrors.serialNumber = true;
+    if (!formData.deviceSerialNumber) newErrors.deviceSerialNumber = true;
     if (!formData.location) newErrors.location = true;
     if (!formData.rowRackNumber) newErrors.rowRackNumber = true;
     if (!formData.status) newErrors.status = true;
@@ -127,13 +126,9 @@ function AssetFormPage2() {
             <ErrorText show={errors.model} />
           </div>
           <div className="form-field">
-            <label>Serial Number <span className="required">*</span></label>
-            <input type="text" name="serialNumber" placeholder="Enter serial number" value={formData.serialNumber} onChange={handleChange} />
-            <ErrorText show={errors.serialNumber} />
-          </div>
-          <div className="form-field">
-            <label>Device Serial Number</label>
+            <label>Device Serial Number <span className="required">*</span></label>
             <input type="text" name="deviceSerialNumber" placeholder="Enter device serial number" value={formData.deviceSerialNumber} onChange={handleChange} />
+            <ErrorText show={errors.deviceSerialNumber} />
           </div>
           <div className="form-field">
             <label>Purchase Order Number</label>
