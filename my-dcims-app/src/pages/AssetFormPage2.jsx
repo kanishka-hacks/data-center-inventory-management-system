@@ -79,6 +79,7 @@ function AssetFormPage2() {
     return <span className="field-error">This field is required</span>;
   }
 
+  //in this we are returning
   return (
     <div className="form-page">
       <h1 className="form-title">Asset Registration - Hardware Details</h1>
