@@ -1,6 +1,7 @@
 package com.dcims.backend.controller;
 
 import com.dcims.backend.model.User;
+import com.dcims.backend.repository.UserRepository;
 import com.dcims.backend.sso.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;

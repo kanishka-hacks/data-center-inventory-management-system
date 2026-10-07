@@ -2,13 +2,13 @@ package com.dcims.backend.filter;
 
 import com.dcims.backend.sso.SsoResult;
 import com.dcims.backend.sso.SsoSessionService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+import tools.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -18,7 +18,6 @@ import java.util.Map;
 public class SsoSessionFilter extends OncePerRequestFilter {
 
     private final SsoSessionService sessionService;
-    private final ObjectMapper objectMapper = new ObjectMapper();
 
     public SsoSessionFilter(SsoSessionService sessionService) {
         this.sessionService = sessionService;
@@ -90,10 +89,19 @@ public class SsoSessionFilter extends OncePerRequestFilter {
     private void sendError(HttpServletResponse response, int status, String message, String reason) throws IOException {
         response.setStatus(status);
         response.setContentType("application/json");
-        Map<String, Object> body = new HashMap<>();
-        body.put("success", false);
-        body.put("message", message);
-        if (reason != null) body.put("reason", reason);
-        response.getWriter().write(objectMapper.writeValueAsString(body));
+
+        StringBuilder json = new StringBuilder();
+        json.append("{\"success\":false,\"message\":\"").append(escapeJson(message)).append("\"");
+        if (reason != null) {
+            json.append(",\"reason\":\"").append(escapeJson(reason)).append("\"");
+        }
+        json.append("}");
+
+        response.getWriter().write(json.toString());
+    }
+
+    private String escapeJson(String value) {
+        if (value == null) return "";
+        return value.replace("\\", "\\\\").replace("\"", "\\\"");
     }
 }
